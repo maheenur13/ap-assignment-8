@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\jahid\\Desktop\\NEXT_WEB_COURSE\\3rd and 6th MILESTONE\\Assignement-8\\logs\\winston\\errors\\.d2071c4e7a72ae76442e0b0fd81e1a6abf2a8788-audit.json",
+    "files": [
+        {
+            "date": 1693663952049,
+            "name": "C:\\Users\\jahid\\Desktop\\NEXT_WEB_COURSE\\3rd and 6th MILESTONE\\Assignement-8\\logs\\winston\\errors\\phu-2023-02-09-20-error.log",
+            "hash": "e0b073e34b7eb2271850d0ca706483d4562ba680c0d2e2e03cd5c202245b7288"
+        },
+        {
+            "date": 1693672010511,
+            "name": "C:\\Users\\jahid\\Desktop\\NEXT_WEB_COURSE\\3rd and 6th MILESTONE\\Assignement-8\\logs\\winston\\errors\\phu-2023-02-09-22-error.log",
+            "hash": "ead75e1a8c8491d405a499269f80a2b571791d77dfd7331bb3bdd1208128be6a"
+        }
+    ],
+    "hashType": "sha256"
+}

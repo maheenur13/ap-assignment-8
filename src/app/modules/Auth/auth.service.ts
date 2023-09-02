@@ -1,11 +1,15 @@
 import { User } from '@prisma/client';
 import prisma from '../../../shared/prisma';
+import { exclude } from '../../../shared/utils';
 
-const signup = async (data: User): Promise<User> => {
+const signup = async (data: User): Promise<Partial<User>> => {
   const result = await prisma.user.create({
     data,
   });
-  return result;
+
+  const userWithoutPassword = exclude(result, ['password']);
+
+  return userWithoutPassword;
 };
 
 export const authService = { signup };
