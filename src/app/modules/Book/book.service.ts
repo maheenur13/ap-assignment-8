@@ -24,14 +24,11 @@ const getAllBooks = async (
   filters: IBookFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<Book[]>> => {
-  console.log({ filters });
-
   const { searchTerm, ...filterData } = filters;
   const { page, size, skip } =
     paginationHelpers.calculatePagination(paginationOptions);
 
   const andConditions = [];
-  console.log({ filterData });
 
   if (searchTerm) {
     andConditions.push({
