@@ -48,8 +48,16 @@ const createOrder = async (
   return order;
 };
 
-const getAllOrders = async (): Promise<Order[]> => {
+const getAllOrders = async (userDetails: JwtPayload): Promise<Order[]> => {
+  const whereConditions: Prisma.OrderWhereInput =
+    userDetails.role === 'customer'
+      ? {
+          userId: userDetails.userId,
+        }
+      : {};
+
   const result = await prisma.order.findMany({
+    where: whereConditions,
     include: {
       orderedBooks: true,
       user: true,
