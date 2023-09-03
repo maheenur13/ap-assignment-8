@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 import { orderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await orderService.createOrder(req.body, req.user);
+  const result = await orderService.createOrder(req.body, req.user!);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -26,7 +26,7 @@ const getAllOrders = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await orderService.getSingleOrder(id);
+  const result = await orderService.getSingleOrder(id, req.user!);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

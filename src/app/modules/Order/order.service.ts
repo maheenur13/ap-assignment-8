@@ -1,17 +1,14 @@
-import { Order } from '@prisma/client';
+import { Order, Prisma } from '@prisma/client';
 import prisma from '../../../shared/prisma';
-import {
-  IOrderBook,
-  IOrderBookPayload,
-  IUserDetails,
-} from './order.interfaces';
+import { IOrderBook, IOrderBookPayload } from './order.interfaces';
 import ApiError from '../../../errors/ApiError';
 import { asyncForEach } from '../../../shared/utils';
 import httpStatus from 'http-status';
+import { JwtPayload } from 'jsonwebtoken';
 
 const createOrder = async (
   data: IOrderBookPayload,
-  userData: IUserDetails
+  userData: JwtPayload
 ): Promise<Order | null> => {
   const orderDetails = await prisma.$transaction(async transactionClient => {
     const orderedInfo = {
@@ -62,11 +59,21 @@ const getAllOrders = async (): Promise<Order[]> => {
   return result;
 };
 
-const getSingleOrder = async (id: string): Promise<Order | null> => {
+const getSingleOrder = async (
+  id: string,
+  userDetails: JwtPayload
+): Promise<Order | null> => {
+  const whereConditions: Prisma.OrderWhereUniqueInput =
+    userDetails.role === 'customer'
+      ? {
+          userId: userDetails.userId,
+          id: id,
+        }
+      : {
+          id: id,
+        };
   const result = await prisma.order.findUnique({
-    where: {
-      id,
-    },
+    where: whereConditions,
     include: {
       orderedBooks: true,
       user: true,

@@ -6,7 +6,7 @@ import { orderValidation } from './order.validation';
 import { orderController } from './order.controller';
 const router = express.Router();
 
-router.get('/', orderController.getAllOrders);
+router.get('/', auth(ENUM_USER_ROLE.ADMIN), orderController.getAllOrders);
 router.post(
   '/create-order',
   validateRequest(orderValidation.createOrder),
@@ -14,6 +14,15 @@ router.post(
   orderController.createOrder
 );
 
-router.get('/:id', orderController.getSingleOrder);
+router.get(
+  '/',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER),
+  orderController.getSingleOrder
+);
+router.get(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER),
+  orderController.getSingleOrder
+);
 
 export const orderRoutes = router;
