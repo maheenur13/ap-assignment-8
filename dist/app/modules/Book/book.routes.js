@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.bookRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const auth_1 = __importDefault(require("../../middlewares/auth"));
+const user_1 = require("../../../enums/user");
+const book_controller_1 = require("./book.controller");
+const validateRequest_1 = __importDefault(require("../../middlewares/validateRequest"));
+const book_validation_1 = require("./book.validation");
+const router = express_1.default.Router();
+router.get('/', book_controller_1.bookController.getAllBooks);
+router.post('/create-book', (0, validateRequest_1.default)(book_validation_1.bookValidation.createBook), (0, auth_1.default)(user_1.ENUM_USER_ROLE.ADMIN), book_controller_1.bookController.createBook);
+router.get('/:id', book_controller_1.bookController.getSingleBook);
+router.get('/:id/category', book_controller_1.bookController.getBooksByCategoryId);
+router.delete('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.ADMIN), book_controller_1.bookController.deleteBook);
+router.patch('/:id', (0, validateRequest_1.default)(book_validation_1.bookValidation.updateBook), (0, auth_1.default)(user_1.ENUM_USER_ROLE.ADMIN), book_controller_1.bookController.updateBook);
+exports.bookRoutes = router;
