@@ -49,6 +49,15 @@ const signIn = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 };
 
 const signup = async (data: User): Promise<Partial<User>> => {
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      email: data.email,
+    },
+  });
+  if (isUserExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'user already exist');
+  }
+
   const result = await prisma.user.create({
     data,
   });
