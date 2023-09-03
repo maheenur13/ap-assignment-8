@@ -1,2 +1,9 @@
+export type ILoginUserResponse = {
+  accessToken: string;
+  refreshToken: string;
+};
 
-// Define your interfaces here
+export type ILoginUser = {
+  email: string;
+  password: string;
+};
