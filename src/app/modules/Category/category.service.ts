@@ -1,5 +1,7 @@
 import { Category } from '@prisma/client';
 import prisma from '../../../shared/prisma';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
 
 const createCategory = async (data: Category): Promise<Category> => {
   const result = await prisma.category.create({
@@ -23,6 +25,10 @@ const getSingleCategory = async (id: string): Promise<Category | null> => {
       books: true,
     },
   });
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'category not found!');
+  }
   return result;
 };
 
