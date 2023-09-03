@@ -8,6 +8,8 @@ CREATE TABLE "users" (
     "contactNo" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "profileImg" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -16,6 +18,8 @@ CREATE TABLE "users" (
 CREATE TABLE "categories" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +33,8 @@ CREATE TABLE "books" (
     "genre" TEXT NOT NULL,
     "publicationDate" TIMESTAMP(3) NOT NULL,
     "categoryId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "books_pkey" PRIMARY KEY ("id")
 );
@@ -40,6 +46,8 @@ CREATE TABLE "reviewsandratings" (
     "rating" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,
     "bookId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "reviewsandratings_pkey" PRIMARY KEY ("id")
 );
@@ -49,7 +57,8 @@ CREATE TABLE "orders" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
-    "createdAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
@@ -60,6 +69,8 @@ CREATE TABLE "orderedbooks" (
     "orderId" TEXT NOT NULL,
     "bookId" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "orderedbooks_pkey" PRIMARY KEY ("id")
 );
