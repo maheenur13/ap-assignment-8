@@ -16,6 +16,8 @@ router.post(
 
 router.get('/:id', bookController.getSingleBook);
 
+router.get('/:id/category', bookController.getBooksByCategoryId);
+
 router.delete('/:id', auth(ENUM_USER_ROLE.ADMIN), bookController.deleteBook);
 router.patch(
   '/:id',

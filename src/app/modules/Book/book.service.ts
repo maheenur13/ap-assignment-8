@@ -121,6 +121,43 @@ const getSingleBook = async (id: string): Promise<Book | null> => {
   });
   return result;
 };
+const getBooksByCategoryId = async (
+  id: string,
+  paginationOptions: IPaginationOptions
+): Promise<IGenericResponse<Book[]>> => {
+  const { page, size, skip } =
+    paginationHelpers.calculatePagination(paginationOptions);
+
+  const result = await prisma.book.findMany({
+    where: {
+      category: {
+        id,
+      },
+    },
+    skip,
+    include: {
+      category: true,
+    },
+  });
+
+  const total = await prisma.book.count({
+    where: {
+      category: {
+        id,
+      },
+    },
+  });
+
+  return {
+    meta: {
+      page,
+      size,
+      total,
+      totalPage: Math.ceil(total / size),
+    },
+    data: result,
+  };
+};
 
 const updateBook = async (
   id: string,
@@ -156,4 +193,5 @@ export const bookService = {
   getSingleBook,
   updateBook,
   deleteBook,
+  getBooksByCategoryId,
 };
