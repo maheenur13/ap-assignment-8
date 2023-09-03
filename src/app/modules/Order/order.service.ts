@@ -80,6 +80,7 @@ const getSingleOrder = async (
       : {
           id: id,
         };
+
   const result = await prisma.order.findUnique({
     where: whereConditions,
     include: {
