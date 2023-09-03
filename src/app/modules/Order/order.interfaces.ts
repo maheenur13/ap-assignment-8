@@ -1,2 +1,13 @@
+export type IUserDetails = {
+  userId: string;
+  role: 'admin' | 'customer';
+};
 
-// Define your interfaces here
+export type IOrderBook = {
+  bookId: string;
+  quantity: number;
+};
+
+export type IOrderBookPayload = {
+  orderedBooks: IOrderBook[];
+};
